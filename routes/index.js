@@ -11,6 +11,8 @@ router.get('/',homeControllers.home);
 
 router.use('/users',require('./users'));
 
+router.use('/posts',require('./posts'));
+
 //for any further routes, access from here
 //router.use('/NameofRoutes',requires('./routerFile'));
 

@@ -8,6 +8,9 @@ app.use(express.static('./assets'));
 
 //express ejs layouts
 const expressLayouts = require('express-ejs-layouts');
+
+const db = require('./config/mongoose');
+
 app.use(expressLayouts);
 
 //extract style and scripts from sub pages into the layouts  

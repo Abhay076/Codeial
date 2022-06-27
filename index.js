@@ -1,11 +1,13 @@
-const express = require('express');
 
+const express = require('express');
+const cookieParser = require('cookie-parser');
 const port = 8000;
  const app = express();
 
 //use for render all css, js and image file using this 
 app.use(express.static('./assets'));
-
+app.use(express.urlencoded());
+app.use(cookieParser());
 //express ejs layouts
 const expressLayouts = require('express-ejs-layouts');
 

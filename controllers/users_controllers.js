@@ -3,9 +3,22 @@
 const User = require('../models/user');
 module.exports.profile = function(req,res){
     // res.end('<h1> Users Profile </h1>');
-    return res.render('user_profile',{
-        title:"Users profile"
-    });
+    if(req.cookies.user_id){
+       User.findById(req.cookies.user_id,function(err,user){
+        if(user){
+            return res.render('user_profile',{
+                title:"Users Profile",
+                user:user
+            });
+        }
+        else{
+            return res.redirect('/users/sign-in');
+        }
+       });
+    }
+    else{
+        return res.redirect('/users/sign-in');
+    }
 }
 
 // render page for Sign Up

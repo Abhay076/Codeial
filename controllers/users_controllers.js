@@ -50,5 +50,5 @@ module.exports.create = function(req,res){
 }
 //get the sign in data
 module.exports.createSession = function(req,res){
-    //TODO
+    return res.redirect('/');
 }

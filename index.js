@@ -49,6 +49,7 @@ app.set('layout extractScripts',true);
         }
     )
  }));
+ //finished autho
 
  app.use(passport.initialize());
  app.use(passport.session());

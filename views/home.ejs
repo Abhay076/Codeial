@@ -1,7 +1,9 @@
 
-<h1>Codeial / <%=title%></h1>
+<!-- <h1>Codeial / <%=title%></h1> -->
+<link rel="stylesheet" href="/css/home.css">
+<div id="home-container">
 
-<section id="feed-posts">
+  <section id="feed-posts">
     <h1>Posts</h1>
     <%if(locals.user){ %>
     <form action="/posts/create" id="new-post-form" method="post">
@@ -17,13 +19,15 @@
     </ul>
 
    </div>
-</section>
+ </section>
 
-<section id="user-friends">
+  <section id="user-friends">
    <h4>Friends</h4>
    <% for(u of all_users){%>
           <p>
             <a href="/users/profile/<%=u.id %>"><%= u.name %></a>
           </p>
     <%}%>
-</section>
+ </section>
+
+</div>

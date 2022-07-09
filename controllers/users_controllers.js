@@ -72,17 +72,19 @@ module.exports.create = function(req,res){
 }
 //get the sign in data
 module.exports.createSession = function(req,res){
+    req.flash('success','Logged in Successful');
     return res.redirect('/');
 }
 
 
 module.exports.destroySession = function(req,res,next){
     // req.logout();
+
     req.logout(function (err) {
         if (err) {
           return next(err);
         }
-    
+    req.flash('success','You have logged out');
     return res.redirect('/');
     });
 }

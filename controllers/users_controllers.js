@@ -2,10 +2,15 @@
 // const { model } = require("mongoose");
 const User = require('../models/user');
 module.exports.profile = function(req,res){
+
     // res.end('<h1> Users Profile </h1>');
-    return res.render('user_profile',{
-        title:"Users profile"
+    User.findById(req.params.id, function(err,user){
+        return res.render('user_profile',{
+            title:"Users profile",
+            profile_user: user
+        });
     });
+    
 }
 
 // render page for Sign Up

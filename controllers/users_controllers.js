@@ -61,6 +61,7 @@ module.exports.create = function(req,res){
                     console.log('error in creating user while signing Up',err);
                     return;
                 }
+                req.flash('success','SignUp Successfully')
                 return res.redirect('/users/sign-in');
             });
         }

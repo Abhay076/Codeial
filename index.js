@@ -30,12 +30,15 @@ app.use(sassMiddleware({
 }));
 //use for render all css, js and image file using this 
 app.use(express.static('./assets'));
+
+
 app.use(express.urlencoded());
 app.use(cookieParser());
 
 
 app.use(expressLayouts);
-
+//make the uploads path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
 //extract style and scripts from sub pages into the layouts  
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);

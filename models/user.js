@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    avatars:{
-        type: String
+    avatar:{
+        type: String,
     }
 },{
     timestamps:true

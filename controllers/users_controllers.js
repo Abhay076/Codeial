@@ -14,13 +14,6 @@ module.exports.profile = function(req,res){
 }
 
 module.exports.update = async function(req,res){
-    // if(req.user.id == req.params.id){
-    //     User.findByIdAndUpdate(req.params.id,req.body, function(err,user){
-    //         return res.redirect('back');
-    //     });
-    // }else{
-    //     return res.status(401).send('Unauthorized');
-    // }
     if(req.user.id == req.params.id){
         
         try{
@@ -33,7 +26,7 @@ module.exports.update = async function(req,res){
                 user.name =req.body.name;
                 user.email = req.body.email;
                 if(req.file){
-                    user.avatar = User.avtarPath + '/' + req.file.filename
+                    user.avatar = User.avatarPath + '/' + req.file.filename
                 }
                 user.save();
                 return res.redirect('back');

@@ -8,23 +8,23 @@
 
         $.ajax({
             type: 'post',
-            url: 'posts/create',
+            url: '/posts/create',
             data: newPostForm.serialize(),
             success: function(data){
+                new Noty({
+                    theme: 'relax',
+                    text: "Post published!",
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
                 let newPost = newPostDom(data.data.post);
+                console.log(data.data.post);
                 $('#posts-list-container>ul').prepend(newPost);
                 deletePost($(' .delete-post-button',newPost));
 
                  // call the create comment class
                  new PostComments(data.data.post._id);
-                 new Noty({
-                     theme: 'relax',
-                     text: "Post published!",
-                     type: 'success',
-                     layout: 'topRight',
-                     timeout: 1500
-                 }).show();
-                // console.log(data);
             }, error: function(error){
                 console.log(error.responseText);
             }

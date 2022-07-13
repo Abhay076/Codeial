@@ -5,9 +5,9 @@ const crypto =require('crypto');
 const User = require('../models/user');
 //tell passport to use strategy for google login
 passport.use(new googleStrategy({
-    clientID: "",
-    clientSecret: "",
-    callbackURL: " ",
+   clientID: "",
+   clientSecret: "",
+   callbackURL: ""
    },
    function(accessToken, refreshToken, profile, done){
        // find user 
@@ -23,9 +23,9 @@ passport.use(new googleStrategy({
           }else{
             // if not found, create the user and set it as req.user
              User.create({
-                profile: profile.displayName,
+                name: profile.displayName,
                 email: profile.emails[0].value,
-                password: crypto.randomBytes[20].toString('hex')
+                password: crypto.randomBytes(20).toString('hex')
              }, function(err,user){
                 if(err){
                     console.log('error in creating user google strategy-passport',err);

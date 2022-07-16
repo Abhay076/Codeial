@@ -2,9 +2,12 @@ const Comment = require('../models/comment');
 
 const Post = require('../models/post');
 
+const commentsMailer = require('../mailers/comments_mailer');
+
 module.exports.create = async function(req,res){
     try{
         let post = await Post.findById(req.body.post);
+        console.log('reached controller********');
         if(post){
             let comment = await Comment.create({
                 content: req.body.content,
@@ -13,20 +16,25 @@ module.exports.create = async function(req,res){
             });
             post.comments.push(comment);
             post.save();
-
+            // console.log(comment);
+            // comments = await comment.populate('user');
+            comment = await comment.populate('user', 'name email');
+             commentsMailer.newComment(comment);
             if (req.xhr){
+                    // Similar for comments to fetch the user's id!
+                    comment = await comment.populate('user', 'name');
                 // Similar for comments to fetch the user's id!
-                comment = await comment.populate('user', 'name').execPopulate();
-    
+                // comment = await comment.populate('user').execPopulate();
+                
                 return res.status(200).json({
                     data: {
                         comment: comment
                     },
-                    message: "Post created!"
+                    message: "Comment created!"
                 });
             }
-            req.flash('success','Comment published!');
-            res.redirect('/');
+            // req.flash('success','Comment published!');
+          return  res.redirect('/');
 
         }
     }catch(err){
@@ -52,16 +60,16 @@ module.exports.destroy = async function(req,res){
                 data: {
                     comment_id: req.params.id
                 },
-                message: "Post deleted"
+                message: "Comment deleted"
             });
         }
       req.flash('success','comment deleted!');
         return res.redirect('back');
     }
-    else{
-        req.flash('error','Unauthorized!');
-        return res.redirect('back'); 
-    }
+    // else{
+    //     req.flash('error','Unauthorized!');
+    //     return res.redirect('back'); 
+    // }
    }catch(err){
     //   console.log('error',err);
             req.flash('error',err);

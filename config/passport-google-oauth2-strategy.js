@@ -7,7 +7,7 @@ const User = require('../models/user');
 passport.use(new googleStrategy({
    clientID: "",
    clientSecret: "",
-   callbackURL: ""
+   callbackURL: "",
    },
    function(accessToken, refreshToken, profile, done){
        // find user 

@@ -3,8 +3,8 @@
 // this class would be initialized for every post on the page
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
-
-class PostComments{
+// const Comment = require('../../models/comment')
+class PostComments {
     // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
         this.postId = postId;
@@ -22,16 +22,18 @@ class PostComments{
 
 
     createComment(postId){
+        console.log("reached********");
         let pSelf = this;
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
-
+       
             $.ajax({
                 type: 'post',
                 url: '/comments/create',
                 data: $(self).serialize(),
                 success: function(data){
+                    console.log('data',data);
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
@@ -57,7 +59,7 @@ class PostComments{
 
     newCommentDom(comment){
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-        return $(`<li id="comment-${ comment._id }">
+        return $(`<li id="comment-${comment._id}">
                         <p>
                             
                             <small>

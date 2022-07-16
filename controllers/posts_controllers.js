@@ -6,9 +6,11 @@ module.exports.create = async function(req,res){
             content:req.body.content,
             user:req.user._id
         });
+        post = await post.populate('user');
         if(req.xhr){
             // post = await post.populate('user', 'name').execPopulate();
-            post = await post.populate('user');
+            // post = await post.populate('user');
+
             return res.status(200).json({
                 data:{
                     post:post
@@ -16,7 +18,7 @@ module.exports.create = async function(req,res){
                 message: "Post created!"
             });
         }
-        req.flash('success','Post published!');
+        // req.flash('success','Post published!');
         return res.redirect('back');
     }catch(err){
         // console.log('error',err);
@@ -31,7 +33,7 @@ module.exports.destroy = async function(req,res){
         let post = await Post.findById(req.params.id);
        // .id means converting the object id into string
     if(post.user==req.user.id){
-        post.remove();
+        await post.remove();
 
         await Comment.deleteMany({post: req.params.id});
         
@@ -47,10 +49,10 @@ module.exports.destroy = async function(req,res){
         req.flash('success','Post and associated comments deleted!');
         return res.redirect('back');
     }
-    else{
-        req.flash('error','You cannot delete this post!');
-        return res.redirect('back');
-    }
+    // else{
+    //     req.flash('error','You cannot delete this post!');
+    //     return res.redirect('back');
+    // }
     }catch(err){
         //  console.log('error',err);
         req.flash('error',err);

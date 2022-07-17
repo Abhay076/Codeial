@@ -12,7 +12,7 @@ module.exports.toggleLike = async function(req,res){
             likeable = await Post.findById(req.query.id).populate('likes');
         }
         else{
-            likeble = await Comment.findById(req.query.id).populate('likes');
+            likeable = await Comment.findById(req.query.id).populate('likes');
         }
 
 

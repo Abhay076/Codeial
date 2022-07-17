@@ -5,7 +5,7 @@ const crypto =require('crypto');
 const User = require('../models/user');
 //tell passport to use strategy for google login
 passport.use(new googleStrategy({
-   
+      
    },
    function(accessToken, refreshToken, profile, done){
        // find user 
